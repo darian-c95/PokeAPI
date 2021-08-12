@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
+    <script src="https://kit.fontawesome.com/71054019ad.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+  
+  
+  <header>
+    <img class="logo" src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png">
+  </header>
+
+  <main id="container">
+    <nav id="navbar">
+      <div class="search-cont">
+        <input id="search-pokemon" type="text" placeholder="Enter pokemon">
+        <button id="button-search">Search</button>
+      </div>
+      
+      <ul id="pokemon-list">
+        <li><a class="nav-link" id="pokemon-1">Bulbasaur</a></li>
+        <li>
+          <a class="nav-link" id="pokemon-2">Ivysaur</a>
+        </li>
+        <li>
+          <a class="nav-link" id="pokemon-3">Venusaur</a>
+        </li>
+        <li><a class="nav-link" id="pokemon-4">Charmander</a></li>
+        <li><a class="nav-link" id="pokemon-5">Charmeleon</a></li>
+        <li>
+          <a class="nav-link" id="pokemon-6">Charizard</a>
+        </li>
+        <li><a class="nav-link" id="pokemon-7">Squirtle</a></li>
+        <li><a class="nav-link" id="pokemon-8">Wartortle</a></li>
+      </ul>
+    </nav>
+    <!--=========================================================-->
+    <div class="card">
+      <h2>Cargando...</h2>
+      <div class="flex-cont">
+        <i class="fas fa-chevron-left"></i> 
+        <img id="front_default">
+        <i class="fas fa-chevron-right"></i>
+      </div>
+  
+      <div class="circle-cont">
+        <i id="first-circle" class="fas fa-circle"></i>
+        <i id="second-circle" class="fas fa-circle"></i>
+      </div>
+      <ul id="list">
+        <li id="ability"></li>
+        <li id="type"></li>
+        <li id="height"></li>
+        <li id="weight"></li>
+        <li id="base_experience"></li>
+      </ul>
+    </div>
+    
+    <div class="div-button">
+      <button id="back">Back</button>
+      <button id="next">Next</button>
+    </div>
+  </main>
+
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="module" src='src/index.js'></script>   
+</body>
+</html>
