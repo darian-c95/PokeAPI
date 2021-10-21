@@ -9,14 +9,9 @@
     <script src="https://kit.fontawesome.com/71054019ad.js" crossorigin="anonymous"></script>
 
 </head>
-<body>
-  
-  
-  <header>
-    <img class="logo" src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png">
-  </header>
+<body> 
 
-  <main id="container">
+  <div class="container">
     <nav id="navbar">
       <div class="search-cont">
         <input id="search-pokemon" type="text" placeholder="Enter pokemon">
@@ -40,36 +35,44 @@
         <li><a class="nav-link" id="pokemon-8">Wartortle</a></li>
       </ul>
     </nav>
-    <!--=========================================================-->
-    <div class="card">
-      <h2>Cargando...</h2>
-      <div class="flex-cont">
-        <i class="fas fa-chevron-left"></i> 
-        <img id="front_default">
-        <i class="fas fa-chevron-right"></i>
-      </div>
-  
-      <div class="circle-cont">
-        <i id="first-circle" class="fas fa-circle"></i>
-        <i id="second-circle" class="fas fa-circle"></i>
-      </div>
-      <ul id="list">
-        <li id="ability"></li>
-        <li id="type"></li>
-        <li id="height"></li>
-        <li id="weight"></li>
-        <li id="base_experience"></li>
-      </ul>
+
+    <div class="container-card">
+      <header>
+        <img class="logo" src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png">
+      </header>
+      <main id="container" class="box-card">
+        <!--=========================================================-->
+        <div class="card">
+          <h2>Cargando...</h2>
+          <div class="flex-cont">
+            <i class="fas fa-chevron-left"></i> 
+            <img id="front_default">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+      
+          <div class="circle-cont">
+            <i id="first-circle" class="fas fa-circle"></i>
+            <i id="second-circle" class="fas fa-circle"></i>
+          </div>
+          <ul id="list">
+            <li id="ability"></li>
+            <li id="type"></li>
+            <li id="height"></li>
+            <li id="weight"></li>
+            <li id="base_experience"></li>
+          </ul>
+        </div>
+        
+        <div class="div-button">
+          <button id="back">Back</button>
+          <button id="next">Next</button>
+        </div>
+      </main>
     </div>
     
-    <div class="div-button">
-      <button id="back">Back</button>
-      <button id="next">Next</button>
-    </div>
-  </main>
+  </div> 
 
-
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script type="module" src='src/index.js'></script>   
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="module" src='src/index.js'></script>   
 </body>
 </html>
