@@ -11,13 +11,21 @@ body {
     color: var(--color-white);
 }
 
+.container {
+    display: flex;
+}
+
+.container-card {
+    width: 100%;
+}
+
 #navbar {
     background-color: var(--color-dark);
-    position: fixed;
+    position: relative;
     min-width: 290px;
     left: 0px;
     width: 300px;
-    height: 115vh;
+    height: 100vh;
 }
 
 #navbar ul {
@@ -43,7 +51,7 @@ body {
     cursor: pointer;
 }
 
-#container {
+.box-card {
     display: flex;
     height: 85vh;
     flex-direction: column;
