@@ -11,5 +11,5 @@ function inicializar() {
   imagenes(contador)
 }
               
-inicializar();
+inicializar();  
 
