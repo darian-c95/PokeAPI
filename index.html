@@ -5,85 +5,62 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
     <script src="https://kit.fontawesome.com/71054019ad.js" crossorigin="anonymous"></script>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
 
 </head>
 <body> 
   <div class="container">
     <nav id="navbar">
       <div class="search-cont">
-        <input id="search-pokemon" type="text" placeholder="Enter pokemon">
-        <button id="button-search">Search</button>
+        <input id="input-buscar-pokemon" type="text" placeholder="Ingrese un pokemon">
+        <button id="boton-buscar">Buscar</button>
       </div>
       
-      <ul id="pokemon-list">
-
-        <p>Cargando...</p>
-        <li>
-          <a class="nav-link" id="pokemon-1">Bulbasaur</a>
-        </li>
-        <li>
-          <a class="nav-link" id="pokemon-2">Ivysaur</a>
-        </li>
-        <li>
-          <a class="nav-link" id="pokemon-3">Venusaur</a>
-        </li>
-        <li>
-          <a class="nav-link" id="pokemon-4">Charmander</a>
-        </li>
-        <li>
-          <a class="nav-link" id="pokemon-5">Charmeleon</a>
-        </li>
-        <li>
-          <a class="nav-link" id="pokemon-6">Charizard</a>
-        </li>
-        <li>
-          <a class="nav-link" id="pokemon-7">Squirtle</a>
-        </li>
-        <li>
-          <a class="nav-link" id="pokemon-8">Wartortle</a>
-        </li>
-      </ul>
+      <div>
+        <button aria-label="Close navigation" class="close-nav ocultar-boton">&times;</button>
+        <ul id="pokemon-list">
+          <p>Cargando...</p>
+        </ul>
+      </div>
     </nav>
 
     <div class="container-card">
       <header>
         <img class="logo" src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png">
+        <button aria-label="Open navigation" class="open-nav">&#9776;</button>
       </header>
-      <main id="container" class="box-card">
-        
+      
+      <main id="container" class="box-card">  
         <div class="card">
-          <h2>Cargando...</h2>
+          <h2 id="titulo-descripcion">Hay <span id="total-pokemones">...</span> pokemones en la Pokedex. Elegí uno para ver su información.</h2>
           <div class="flex-cont">
             <i class="fas fa-chevron-left"></i> 
             <img id="front_default">
             <i class="fas fa-chevron-right"></i>
           </div>
-      
+          
           <div class="circle-cont">
-            <i id="first-circle" class="fas fa-circle"></i>
-            <i id="second-circle" class="fas fa-circle"></i>
+            <i id="primer-circulo" class="fas fa-circle"></i>
+            <i id="segundo-circulo" class="fas fa-circle"></i>
           </div>
-          <ul id="list">
-            <li id="ability"></li>
-            <li id="type"></li>
-            <li id="height"></li>
-            <li id="weight"></li>
-            <li id="base_experience"></li>
+          <ul id="list"> 
+            <div id="tipos"></div>
+            <li id="altura"></li>
+            <li id="peso"></li>
+            <li id="experiencia_base"></li>
+
+            <div id="contenedor-habilidades">
+              <h3></h3>
+              <div id="total-habilidades"></div>
+            </div>
           </ul>
-        </div>
-        
-        <div class="div-button">
-          <button id="back">Back</button>
-          <button id="next">Next</button>
-        </div>
+        </div> 
       </main>
     </div>
     
   </div> 
-
-  <script src="node_modules/jquery/dist/jquery.min.js"></script> 
+ 
   <script type="module" src='src/index.js'></script>    
   <script type="module" src='src/index.js'></script>   
 
