@@ -44,7 +44,7 @@ function mostrarFotoFrontal(fotoFrontal) {
 
 
 export function traeNombredePokemones() {
-    for(let i = 9; i <= 898; i++) {
+    for(let i = 0; i <= 898; i++) {
       obtenerPokemones(i).then((r) => {
         let namePokemon = r.forms[0].name;
         let namePokemonUppercase = namePokemon[0].toUpperCase() + namePokemon.slice(1);  
@@ -52,8 +52,9 @@ export function traeNombredePokemones() {
       });
     } 
 }
-  
+
 function creaListaConNombres(nombreMayuscula) {
+    document.querySelector('#pokemon-list p').innerHTML = ''
     $(`<li><a class='nav-link'>${nombreMayuscula}</a></li>`).appendTo( "#pokemon-list" );
 }
 
@@ -90,10 +91,12 @@ export function buscarPokemonPorNombre() {
       imagenes(pokemonName);
     }
   }
-// buscarPokemonPorNombre(); Esta llamada se hace en index.js 
+  
 
 export function pokemonListaClickeado() {
-    document.querySelector('#pokemon-list').onclick = function(e) {
+  document.querySelector('#pokemon-list').onclick = function(e) {
+      
+      localStorage.setItem('asdd', '91')
       let anchorClick = (e.target.textContent).toLocaleLowerCase();
       secondCircle.style.opacity = 0.4;
       firstCircle.style.opacity = 1;
@@ -101,3 +104,7 @@ export function pokemonListaClickeado() {
       imagenes(anchorClick);
     }
 }
+
+
+
+ 
