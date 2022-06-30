@@ -1,15 +1,10 @@
-import {pokemonCaracteristicas, mostrarSiguienteCarta, mostrarCartaAnterior} from './ui.js';
-import{contador, traeNombredePokemones, pokemonListaClickeado, buscarPokemonPorNombre, imagenes} from './logica.js';
+import{pokemonListaClickeado, buscarPokemonPorNombre, creaListaPokemones} from './logica.js';
 
-function inicializar() {
-  pokemonCaracteristicas(contador);
-  traeNombredePokemones();
-  pokemonListaClickeado();
-  mostrarSiguienteCarta();
-  mostrarCartaAnterior();
-  buscarPokemonPorNombre();
-  imagenes(contador)
+export function inicializar() {   
+  creaListaPokemones()  
+  pokemonListaClickeado() 
+  buscarPokemonPorNombre(); 
 }
-              
 inicializar();  
+
 
