@@ -27,7 +27,9 @@ export async function creaListaPokemones() {
   document.querySelector('#pokemon-list p').innerHTML = ''
 
   const respuesta = await obtenerPokemones();
-  const pokemonesTotalLista = respuesta.results.map((pokemon) => pokemon.name); 
+  const {results} = await respuesta.json();
+  const pokemonesTotalLista = results.map((pokemon) => pokemon.name);
+
   totalPokemonesEnPokedex(respuesta);
 
   pokemonesTotalLista.forEach((pokemon) => {
@@ -93,9 +95,10 @@ export function pokemonListaClickeado() {
 }
 
 async function obtenerPokemonApi(pokemon) { 
-  const respuestaPokemonApi = await obtenerPokemon(pokemon) 
+  const respuesta = await obtenerPokemon(pokemon);
+  const respuestaPokemonApi = await respuesta.json(); 
   
-  guardarPokemonEnLocalStorage(respuestaPokemonApi) 
+  guardarPokemonEnLocalStorage(respuestaPokemonApi);
 
   return manejadorDeData(respuestaPokemonApi);
 }
