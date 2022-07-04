@@ -1,4 +1,5 @@
 export function guardarPokemonEnLocalStorage(respuestaPokemonApi) {
+
     if (respuestaPokemonApi === undefined || typeof respuestaPokemonApi !== 'object') {
         throw new Error('Se necesita un pokemon para guardar en localStorage');
     }
@@ -7,6 +8,7 @@ export function guardarPokemonEnLocalStorage(respuestaPokemonApi) {
 }
 
 export function traerPokemonDeLocalStorage(pokemonClickLista) {
+    
     if (pokemonClickLista === null) {
         throw new Error('Se necesita el nombre de un pokemon que este almacenado en localStorage');
     }

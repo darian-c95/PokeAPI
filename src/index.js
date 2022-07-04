@@ -1,9 +1,7 @@
-import{pokemonListaClickeado, buscarPokemonPorNombre, creaListaPokemones} from './logica.js';
+import { creaListaPokemones } from './pokedex.js';
 
 export function inicializar() {   
-  creaListaPokemones()  
-  pokemonListaClickeado() 
-  buscarPokemonPorNombre(); 
+  creaListaPokemones(); 
 }
 inicializar();  
 
