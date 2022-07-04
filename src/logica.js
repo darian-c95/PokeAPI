@@ -2,26 +2,66 @@ import {obtenerPokemones, obtenerPokemon} from './api/pokeapi.js';
 import { guardarPokemonEnLocalStorage, traerPokemonDeLocalStorage } from './storage/pokemonStorage.js';
 import {imagenFrontal, pokemonAltura, pokemonexperienciaBase, pokemonHabilidades, pokemonPeso, pokemonTipo, tituloCarta} from './ui/ui.js';
 
+
+class Pokemon {
+
+  constructor(data) {
+
+    this.name = data.name; 
+    this.img = data.sprites; 
+    this.imgFront = data.sprites.front_default; 
+    this.weight = data.weight; 
+    this.height = data.height; 
+    this.baseExperience = data.base_experience;  
+    this.abilities = data.abilities;  
+    this.types = data.types;  
+      
+  }
+   
+}
+
+function manejadorDeData(dataPokemon) {  
+  
+  const pokemonInstance = new Pokemon(dataPokemon); 
+
+  tituloCarta(pokemonInstance.name);
+  imagenes(pokemonInstance.img);
+  imagenFrontal(pokemonInstance.imgFront);
+  pokemonPeso(pokemonInstance.weight);
+  pokemonAltura(pokemonInstance.height);
+  pokemonexperienciaBase(pokemonInstance.baseExperience);
+  pokemonHabilidades(pokemonInstance.abilities); 
+  pokemonTipo(pokemonInstance.types); 
+
+};
+
+
+
 let primerCirculo = document.querySelector('#primer-circulo');
 let segundoCirculo = document.querySelector('#segundo-circulo');
 
+
 export function nombreMayuscula(nombre) {
   return nombre[0].toUpperCase() + nombre.slice(1);
-}
+};
+
  
 export function cambiaOpacidadSegundoCirculo() {
   primerCirculo.style.opacity = 1;
   segundoCirculo.style.opacity = 0.4;
-}
+};
+
 
 function cambiaOpacidadPrimerCirculo() {
   primerCirculo.style.opacity = 0.4;
   segundoCirculo.style.opacity = 1;
-}
+};
+
 
 function totalPokemonesEnPokedex(respuestaApi) {
   document.querySelector('.card span').textContent = respuestaApi.count;
-}
+};
+
 
 export async function creaListaPokemones() {
   document.querySelector('#pokemon-list p').innerHTML = ''
@@ -44,7 +84,8 @@ export async function creaListaPokemones() {
     $item.appendChild($ancor);
     $lista.appendChild($item);
   }); 
-}
+};
+
 
 export function buscarPokemonPorNombre() {
   document.querySelector('#boton-buscar').onclick = function() {
@@ -53,21 +94,25 @@ export function buscarPokemonPorNombre() {
     
     for(let i = 0; i <= 1117; i++) {
       let nombrePoke = document.querySelectorAll('a')[i].innerText
+      
       if(nombreMayuscula(nombrePokemon) === nombrePoke) { 
+
         if(document.querySelector('.item-activo') !== null) {
           document.querySelector('.item-activo').classList.remove('item-activo') 
-            }
-            return document.querySelectorAll('a')[i].className = 'item-activo';
-          }
+        }
+        return document.querySelectorAll('a')[i].className = 'item-activo';
       }
+    }
   }
-}
+};
+
 
 function mostrarIconos() {
   document.querySelector('.circle-cont').style.display = 'block';
   document.querySelector('.fa-chevron-right').style.display = 'block';
   document.querySelector('.fa-chevron-left').style.display = 'block';
-}
+};
+
 
 export function pokemonListaClickeado() {
   document.querySelector('#pokemon-list').onclick = function(e) { 
@@ -92,27 +137,19 @@ export function pokemonListaClickeado() {
       } 
     } 
   }
-}
+};
+
 
 async function obtenerPokemonApi(pokemon) { 
   const respuesta = await obtenerPokemon(pokemon);
-  const respuestaPokemonApi = await respuesta.json(); 
+  const respuestaPokemonApi = await respuesta.json();
+  // console.log(respuestaPokemonApi);
   
   guardarPokemonEnLocalStorage(respuestaPokemonApi);
 
   return manejadorDeData(respuestaPokemonApi);
-}
+};
 
-function manejadorDeData(dataPokemon) { 
-  imagenes(dataPokemon.sprites);
-  tituloCarta(dataPokemon.name);
-  imagenFrontal(dataPokemon.sprites.front_default)
-  pokemonPeso(dataPokemon.weight)
-  pokemonAltura(dataPokemon.height)
-  pokemonexperienciaBase(dataPokemon.base_experience)
-  pokemonHabilidades(dataPokemon) 
-  pokemonTipo(dataPokemon)   
-} 
 
 function imagenes(pokemonImagen) {  
   let imagenFrontal = pokemonImagen.front_default;
@@ -120,6 +157,7 @@ function imagenes(pokemonImagen) {
   mostrarFotoTrasera(imagenTrasera);
   mostrarFotoFrontal(imagenFrontal);
 }; 
+
 
 function mostrarFotoTrasera(fotoTrasera) {
   document.querySelector('.fa-chevron-right').onclick = function(e) {  
@@ -129,7 +167,8 @@ function mostrarFotoTrasera(fotoTrasera) {
     
     cambiaOpacidadPrimerCirculo();
   }
-}
+};
+
 
 function mostrarFotoFrontal(fotoFrontal) {
   document.querySelector('.fa-chevron-left').onclick = function(e) {
@@ -139,4 +178,4 @@ function mostrarFotoFrontal(fotoFrontal) {
     
     cambiaOpacidadSegundoCirculo();
   }
-} 
+};

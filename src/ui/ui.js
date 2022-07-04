@@ -15,7 +15,7 @@ export function imagenFrontal(fotoPokemon) {
 
 export function pokemonTipo(dataPokemon) {
   let arrayPokemonTipo = [];
-  dataPokemon.types.forEach(tipo => arrayPokemonTipo.push(tipo.type.name))
+  dataPokemon.forEach(tipo => arrayPokemonTipo.push(tipo.type.name))
 
   const $tipos = document.querySelector('#tipos');
   $tipos.innerHTML = ''
@@ -35,16 +35,16 @@ export function pokemonHabilidades(dataPokemon) {
 
   $totalHabilidades.innerHTML = '';
   let kontador = 0
-  dataPokemon.abilities.forEach(habilidad => { 
+  dataPokemon.forEach(habilidad => { 
     kontador++
     let $nombreHabilidad = document.createElement('p');
-    $nombreHabilidad.textContent = `${nombreMayuscula(habilidad.ability.name)}: `;
+    $nombreHabilidad.textContent = `${nombreMayuscula(habilidad.ability.name)}: `; 
     $nombreHabilidad.className = `habilidad-${kontador}`
     $totalHabilidades.appendChild($nombreHabilidad);
   })
   
   let count = 0;
-  dataPokemon.abilities.forEach(habilidad => fetch(habilidad.ability.url)
+  dataPokemon.forEach(habilidad => fetch(habilidad.ability.url)
   .then((respuesta) => respuesta.json())
   .then((r) => {    
       count++
