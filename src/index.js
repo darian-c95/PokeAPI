@@ -1,7 +1,7 @@
-import { creaListaPokemones } from './pokedex.js';
+import { cargarPokemones } from './pokedex.js'; 
 
-export function inicializar() {   
-  creaListaPokemones(); 
+export function inicializar() {  
+  cargarPokemones(); 
 }
 inicializar();  
 

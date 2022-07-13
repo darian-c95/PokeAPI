@@ -1,38 +1,31 @@
-import { obtenerPokemones, obtenerPokemon } from './api/pokeapi.js';
-import { guardarPokemonEnLocalStorage, traerPokemonDeLocalStorage } from './storage/pokemonStorage.js';
+import { obtenerPokemones, obtenerPokemon } from './api/pokeapi.js'; 
+import { mapearListadoPokemones } from './mapeadores/pokemon.js';
+import { cargarPokemon } from './servicios/pokemon.js';  
 import { imagenes, mostrarIconos, pokemonAltura, pokemonexperienciaBase, pokemonHabilidades, pokemonPeso, pokemonTipo, tituloCarta } from './ui/ui.js';
 
 
-class Pokemon {
+export async function mostrarPokemon(pokemon) {
 
-  constructor(data) {
+  const { 
+    name,
+    imgFront,
+    imgBack, 
+    weight,
+    height,
+    baseExperience,
+    types,
+    abilities, 
+  } = pokemon;  
+    
+  tituloCarta(name);
+  pokemonPeso(weight);
+  pokemonAltura(height);
+  pokemonTipo(types); 
+  pokemonHabilidades(abilities); 
+  imagenes(imgBack, imgFront); 
+  pokemonexperienciaBase(baseExperience);
 
-    this.name = data.name; 
-    this.img = data.sprites; 
-    this.weight = data.weight; 
-    this.height = data.height; 
-    this.baseExperience = data.base_experience;  
-    this.abilities = data.abilities;  
-    this.types = data.types;  
-      
-  }
-   
-}
-
-
-function manejadorDeData(dataPokemon) {  
-  
-  const pokemonInstance = new Pokemon(dataPokemon); 
-
-  imagenes(pokemonInstance.img); 
-  tituloCarta(pokemonInstance.name);
-  pokemonPeso(pokemonInstance.weight);
-  pokemonAltura(pokemonInstance.height);
-  pokemonexperienciaBase(pokemonInstance.baseExperience);
-  pokemonHabilidades(pokemonInstance.abilities); 
-  pokemonTipo(pokemonInstance.types); 
-
-};
+}; 
 
 
 export function nombreMayuscula(nombre) {
@@ -40,17 +33,26 @@ export function nombreMayuscula(nombre) {
 };
 
 
-export async function creaListaPokemones() {
-
-  document.querySelector('#pokemon-list p').innerHTML = '';
+export async function cargarPokemones() {
 
   const respuesta = await obtenerPokemones();
   const data = await respuesta.json();
-  const pokemonesTotalLista = data.results.map((pokemon) => pokemon.name);
   
-  totalPokemonesEnPokedex(data); 
+  const {total, pokemonesName} = mapearListadoPokemones(data);  
+  
+  pokemonEnListaClickeado();
+  buscarPokemonPorNombre();
+  creaListaPokemones(pokemonesName);
+  totalPokemonesEnPokedex(total);
+  
+};
 
-  pokemonesTotalLista.forEach((pokemon) => {
+
+function creaListaPokemones(listaPokemones) {
+  
+  document.querySelector('#pokemon-list p').innerHTML = '';
+
+  listaPokemones.forEach((pokemon) => { 
     const nombrePokemonMayuscula = nombreMayuscula(pokemon);
     const $lista = document.querySelector('#pokemon-list');
     const $item = document.createElement('li');
@@ -62,51 +64,42 @@ export async function creaListaPokemones() {
     $item.appendChild($ancor);
     $lista.appendChild($item);
   });
-      
-  pokemonEnListaClickeado();
-  buscarPokemonPorNombre();
-
+  
 };
 
 
-function totalPokemonesEnPokedex(respuestaApi) {
-  document.querySelector('.card span').textContent = respuestaApi.count;
+function totalPokemonesEnPokedex(totalPokemones) {
+  document.querySelector('.card span').textContent = totalPokemones;
 };
 
 
-function pokemonEnListaClickeado() {
+function vaciarTextoHabilidades() {
+  let $totalHabilidades = document.querySelector('#total-habilidades');
+  $totalHabilidades.innerHTML = '';
+};
+
+
+async function pokemonEnListaClickeado() {
 
   document.querySelector('#pokemon-list').onclick = function(e) { 
+    
     e.preventDefault();
     mostrarIconos();
+    vaciarTextoHabilidades();
 
-    let $elementoConClaseItemActivo = document.querySelector('.item-activo') 
+    let $elementoConClaseItemActivo = document.querySelector('.item-activo');
     if($elementoConClaseItemActivo !== null) {
       $elementoConClaseItemActivo.classList.remove('item-activo');
       $elementoConClaseItemActivo.className = 'nav-link';
     }
-
+    
     const {target} = e; 
     target.className = 'item-activo';
     const nombrePokemonClickeado = target.getAttribute('href');
-
-
-    return obtenerDataPokemonClickeado(nombrePokemonClickeado);
+    
+    return cargarPokemon(nombrePokemonClickeado); 
   }
-};
-
-
-function obtenerDataPokemonClickeado(nombrePokemonClickeado) {
-  
-  const dataPokemonEnLocalStorage = traerPokemonDeLocalStorage(nombrePokemonClickeado);
-  
-  // if(dataPokemonEnLocalStorage) { 
-  //   return manejadorDeData(dataPokemonEnLocalStorage);
-  // } else {  
-  //   return obtenerPokemonApi(nombrePokemonClickeado); 
-  // }
-
-};
+}; 
 
 
 function buscarPokemonPorNombre() {
@@ -130,11 +123,9 @@ function buscarPokemonPorNombre() {
 };
 
 
-export async function obtenerPokemonApi(pokemon) { 
+export async function obtenerPokemonApi(pokemon) {  
   const respuesta = await obtenerPokemon(pokemon);
   const respuestaPokemonApi = await respuesta.json(); 
-  
-  // guardarPokemonEnLocalStorage(respuestaPokemonApi);
 
-  return manejadorDeData(respuestaPokemonApi);
+  return respuestaPokemonApi;
 };
